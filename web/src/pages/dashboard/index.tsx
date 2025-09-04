@@ -2,12 +2,23 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { isAuthenticated } from "../lib/auth";
 
+// Demonstration Purpose
+const buttonStyle: React.CSSProperties = {
+  padding: "0.5rem 1rem",
+  borderRadius: "6px",
+  border: "none",
+  backgroundColor: "#3b82f6",
+  color: "white",
+  cursor: "pointer",
+  fontSize: "1rem",
+};
+
 export default function Dashboard() {
   const router = useRouter();
 
   const handleLogout = async () => {
     await fetch("/api/logout", { method: "POST" });
-    router.push("/login");
+    router.push("/");
   };
 
   return (
@@ -30,12 +41,26 @@ export default function Dashboard() {
       >
         Logout
       </button>
+
+      <div style={{ marginTop: "2rem", display: "flex", gap: "1rem" }}>
+        <button onClick={() => router.push("/users")} style={buttonStyle}>
+          Go to /users
+        </button>
+        <button onClick={() => router.push("/posts/2")} style={buttonStyle}>
+          Go to /posts/2
+        </button>
+        <button onClick={() => router.push("/blogs/3")} style={buttonStyle}>
+          Go to /blogs/3
+        </button>
+      </div>
     </div>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  if (!isAuthenticated(req as any)) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { req } = context;
+
+  if (!isAuthenticated(req)) {
     return {
       redirect: {
         destination: "/",

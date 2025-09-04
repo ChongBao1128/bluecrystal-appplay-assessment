@@ -1,5 +1,7 @@
-import type { NextApiRequest } from "next";
+import type { IncomingMessage } from "http";
 
-export function isAuthenticated(request: NextApiRequest): boolean {
-  return request.cookies?.auth === "1";
+export function isAuthenticated(
+  req: IncomingMessage & { cookies?: Partial<Record<string, string>> }
+): boolean {
+  return req.cookies?.auth === "1";
 }
