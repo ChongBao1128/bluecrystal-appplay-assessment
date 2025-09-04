@@ -11,7 +11,7 @@ type BlogProps = {
   post: Post;
 };
 
-export default function BlogPost({ post }: BlogProps) {
+const BlogPost = ({ post }: BlogProps) => {
   return (
     <article
       style={{
@@ -43,7 +43,7 @@ export default function BlogPost({ post }: BlogProps) {
       <p style={{ lineHeight: 1.6 }}>{post.body}</p>
     </article>
   );
-}
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");

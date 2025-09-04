@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import { isAuthenticated } from "../lib/auth";
+import isAuthenticated from "../lib/auth";
 
 // Demonstration Purpose
 const buttonStyle: React.CSSProperties = {

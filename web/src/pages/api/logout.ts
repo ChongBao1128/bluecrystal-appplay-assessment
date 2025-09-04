@@ -1,7 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiResponse } from "next";
 import { serialize } from "cookie";
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+const handler = (res: NextApiResponse) => {
   res.setHeader(
     "Set-Cookie",
     serialize("auth", "", {
@@ -13,4 +13,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   );
 
   res.status(200).json({ success: true });
-}
+};
+
+export default handler;
