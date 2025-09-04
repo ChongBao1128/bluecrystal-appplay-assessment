@@ -11,6 +11,32 @@ type BlogProps = {
   post: Post;
 };
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const posts: Post[] = await res.json();
+
+  const paths = posts.map((post) => ({
+    params: { slug: String(post.id) }, // using post id as slug
+  }));
+
+  return { paths, fallback: "blocking" };
+};
+
+export const getStaticProps: GetStaticProps<BlogProps> = async ({ params }) => {
+  const slug = params?.slug as string;
+
+  const postRes = await fetch(
+    `https://jsonplaceholder.typicode.com/posts/${slug}`
+  );
+  if (!postRes.ok) return { notFound: true };
+  const post: Post = await postRes.json();
+
+  return {
+    props: { post },
+    revalidate: 60, // optional: revalidate every 60 seconds
+  };
+};
+
 const BlogPost = ({ post }: BlogProps) => {
   return (
     <article
@@ -45,28 +71,4 @@ const BlogPost = ({ post }: BlogProps) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const posts: Post[] = await res.json();
-
-  const paths = posts.map((post) => ({
-    params: { slug: String(post.id) }, // using post id as slug
-  }));
-
-  return { paths, fallback: "blocking" };
-};
-
-export const getStaticProps: GetStaticProps<BlogProps> = async ({ params }) => {
-  const slug = params?.slug as string;
-
-  const postRes = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${slug}`
-  );
-  if (!postRes.ok) return { notFound: true };
-  const post: Post = await postRes.json();
-
-  return {
-    props: { post },
-    revalidate: 60, // optional: revalidate every 60 seconds
-  };
-};
+export default BlogPost;
