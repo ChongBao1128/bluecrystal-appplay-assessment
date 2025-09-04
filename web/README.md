@@ -1,14 +1,7 @@
-Got it — I’ll convert everything into a **clean, safe Markdown README** suitable for a public repository. All content will be safe to expose (no credentials, private info, or sensitive paths).
+# Interview Assessment
 
----
-
-# README.md
-
-```markdown
-# Web Project
-
-This is a **Next.js** project for the `web` application.  
-It demonstrates a blog system with dynamic routes, remote image optimization, and mock API integration.
+This is a **Next.js** project for my interview assessment.  
+It demonstrates the use cases with dynamic routes, remote image optimization, `getServerSideProps`, `getStaticProps`, `getStaticPaths` and mock API integration.
 
 ## Features
 
@@ -23,25 +16,31 @@ It demonstrates a blog system with dynamic routes, remote image optimization, an
 ## Folder Structure
 
 ```
-
 web/
-├── pages/
-│   ├── api/
-│   │   ├── login.ts
-│   │   └── logout.ts
-│   ├── blogs/
-│   │   └── \[slug].tsx
-│   ├── dashboard.tsx
-│   └── index.tsx
-├── lib/
-│   └── auth.ts
-├── public/
-├── styles/
+├── src/
+│ ├── pages/
+│ │ ├── api/
+│ │ │ ├── login.ts
+│ │ │ └── logout.ts
+│ │ ├── blogs/
+│ │ │ └── [slug].tsx
+│ │ ├── posts/
+│ │ │ └── [id].tsx
+│ │ ├── dashboard/
+│ │ │ └── index.tsx
+│ │ ├── users/
+│ │ │ └── index.tsx
+│ │ └── index.tsx
+│ ├── lib/
+│ │ └── auth.ts
+│ ├── styles/
+│ └── public/
 ├── next.config.ts
 ├── tsconfig.json
-└── package.json
+├── package.json
+└── README.md
 
-````
+```
 
 ## Getting Started
 
