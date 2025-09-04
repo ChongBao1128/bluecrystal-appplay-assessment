@@ -1,40 +1,145 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Interview Assessment
+
+This is a **Next.js** project for my interview assessment.  
+It demonstrates the use cases with dynamic routes, remote image optimization, `getServerSideProps`, `getStaticProps`, `getStaticPaths` and mock API integration.
+
+## Features
+
+- Pages Router with TypeScript
+- Dynamic blog posts (`/blogs/[slug]`) fetching mock data from [JSONPlaceholder](https://jsonplaceholder.typicode.com/)
+- Optimized remote images using `next/image`
+- SSR & SSG support (`getServerSideProps`, `getStaticProps`, `getStaticPaths`)
+- Mock authentication for `/dashboard` page
+- Logout functionality with secure cookies
+- Fully responsive layout
+
+## Folder Structure
+
+```
+web/
+├── src/
+│ ├── pages/
+│ │ ├── api/
+│ │ │ ├── login.ts
+│ │ │ └── logout.ts
+│ │ ├── blogs/
+│ │ │ └── [slug].tsx
+│ │ ├── posts/
+│ │ │ └── [id].tsx
+│ │ ├── dashboard/
+│ │ │ └── index.tsx
+│ │ ├── users/
+│ │ │ └── index.tsx
+│ │ └── index.tsx
+│ ├── lib/
+│ │ └── auth.ts
+│ ├── styles/
+│ └── public/
+├── next.config.ts
+├── tsconfig.json
+├── package.json
+└── README.md
+
+```
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repository
+
+```bash
+git clone <your-repo-url>
+cd web
+````
+
+### 2. Install dependencies
+
+```bash
+npm install
+# or
+yarn
+```
+
+### 3. Run development server
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+---
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Available Scripts
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+| Command | Description                       |
+| ------- | --------------------------------- |
+| `dev`   | Runs the development server       |
+| `build` | Builds the project for production |
+| `start` | Starts the production server      |
+| `lint`  | Runs ESLint                       |
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Remote Image Optimization
 
-To learn more about Next.js, take a look at the following resources:
+This project uses `next/image` to optimize external images.
+Make sure your allowed domains are configured in `next.config.ts`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+```ts
+images: {
+  remotePatterns: [
+    {
+      protocol: "https",
+      hostname: "picsum.photos", // example CDN
+      pathname: "/**",
+    },
+  ],
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* Only trusted public image URLs are used.
+* Avoid exposing private or sensitive images.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Mock Authentication
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+* Login page: `/login`
+* Dashboard page: `/dashboard` (protected)
+* Logout clears authentication cookies
+* Uses mock credentials for demonstration purposes
+
+> **Note:** This is for development/testing only. Do not use mock credentials in production.
+
+---
+
+## Security & Public Safety
+
+* No secrets, API keys, or credentials are included.
+* Only public mock APIs (`JSONPlaceholder`, `Picsum Photos`) are used.
+* Safe to share publicly.
+
+---
+
+## License
+
+This project is open source under the **MIT License**.
+
+```
+
+---
+
+This README:  
+- ✅ Uses only safe public URLs and APIs  
+- ✅ Describes project features and folder structure clearly  
+- ✅ Includes instructions for setup and running locally  
+- ✅ Makes security explicit for a public repository  
+
+---
+
+If you want, I can also **add a small “Blog Preview” section with sample screenshots or links to live demos** while keeping it fully public-safe. This usually makes a README look more professional.  
+
+Do you want me to do that?
+```
